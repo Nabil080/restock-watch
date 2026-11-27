@@ -1,0 +1,25 @@
+{
+  "discord_webhook": "",
+  "ntfy_topic": "",
+  "minutes_between_checks": [2, 5],
+  "products": [
+    {
+      "name": "Switch 2 Zelda edition",
+      "min_price": 440,
+      "max_price": 650,
+      "urls": [
+        "https://www.boulanger.com/ref/1250188",
+        "https://www.micromania.fr/p/console-nintendo-switch-2-edition-limitee-40eme-anniversaire-the-legend-of-zelda-164787.html",
+        "https://www.e.leclerc/fp/console-nintendo-switch-2-edition-40e-anniversaire-de-the-legend-of-zelda-nintendo-switch-2-0045496337292",
+        { "url": "https://www.amazon.fr/dp/B0F2TN43GH", "selector": "#desktop_buybox" }
+      ]
+    },
+    {
+      "name": "Switch 2 Pro Controller",
+      "max_price": 65,
+      "urls": [
+        { "url": "https://www.amazon.fr/dp/B0F3JR79YY", "selector": "#desktop_buybox" }
+      ]
+    }
+  ]
+}

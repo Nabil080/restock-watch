@@ -1,0 +1,39 @@
+# Builds RestockWatch-<version>.zip when a version tag such as v1.0.0 is pushed,
+# and publishes it as the release "restock-watch 1.0.0".
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install the dependencies
+        run: python -m pip install -r requirements.txt pyinstaller==6.22.3 pytest
+
+      - name: Run the tests
+        run: python -m pytest -q
+
+      - name: Build the zip
+        shell: bash
+        run: python build.py "${GITHUB_REF_NAME#v}"
+
+      - name: Publish the release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.zip \
+            --title "restock-watch ${GITHUB_REF_NAME#v}" \
+            --notes "Unzip it in a folder of its own and run RestockWatch.exe. The README explains the settings."
